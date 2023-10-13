@@ -1,11 +1,9 @@
 .model-container {
     position: relative;
-    background-color: var(--white);
     padding: 1.50rem;
-    border-radius: var(--radius);
-    box-shadow: var(--dark-shadow);
 }
 
+/* background */
 .overlay {
     position: absolute;
     top: 0;
@@ -16,6 +14,7 @@
     overflow: hidden;
 }
 
+/* making content center */
 .overlay .model-container {
     position: relative;
     display: flex;
@@ -24,6 +23,7 @@
     height: 100vh;
 }
 
+/* this classes for model open && close */
 .close {
     display: none;
 }
