@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Task, Model } from "./component";
 import toast, { Toaster } from "react-hot-toast";
 import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
@@ -6,6 +7,16 @@ import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
 import "./App.css";
 
 const App = () => {
+  const [isModelOpen, setIsModelOpen] = useState(false);
+
+  const modelOpen = () => {
+    setIsModelOpen(true);
+  };
+
+  const modelClose = () => {
+    setIsModelOpen(false);
+  };
+
   return (
     <>
       <Toaster position="bottom-right" reverseOrder={false} />
@@ -18,7 +29,10 @@ const App = () => {
 
             {/* add to list */}
             <div className="mt-6 flex justify-between items-center w-full">
-              <button className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white">
+              <button
+                className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white"
+                onClick={modelOpen}
+              >
                 Add Task
               </button>
               {/* filter Option */}
@@ -29,7 +43,7 @@ const App = () => {
               </select>
             </div>
             <Task />
-            <Model />
+            <Model isModelOpen={isModelOpen} modelClose={modelClose}/>
           </div>
         </div>
       </div>

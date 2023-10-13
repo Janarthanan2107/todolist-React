@@ -1,16 +1,16 @@
 import { LiaTimesSolid } from "react-icons/lia";
 import "../modelWindow/model.css";
 
-const Model = () => {
+const Model = ({ isModelOpen, modelClose }) => {
   return (
-    <div className="overlay close">
+    <div className={`overlay ${isModelOpen ? "open" : "close"}`}>
       <div className="model-container">
         <div className="bg-lightGray p-5 w-[500px] rounded-lg relative">
           <div className="flex justify-between">
             <p className="text-[1.2rem] font-semibold text-darkGray">
               Add TODO
             </p>
-            <span className="bg-iconBg p-2 rounded-sm text-[1.1rem] text-lightDarkGray cursor-pointer absolute -top-11 right-2 hover:bg-red-500 hover:text-white">
+            <span className="bg-iconBg p-2 rounded-sm text-[1.1rem] text-lightDarkGray cursor-pointer absolute -top-11 right-2 hover:bg-red-500 hover:text-white" onClick={modelClose}>
               <LiaTimesSolid />
             </span>
           </div>
@@ -38,10 +38,10 @@ const Model = () => {
               </select>
             </div>
             <div className="form-control flex gap-3 mt-4">
-              <button className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white">
+              <button type="submit" className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white">
                 Add Task
               </button>
-              <button className="py-2 px-[1.3rem] text-[1rem] font-medium bg-paleGray rounded-md text-darkGray">
+              <button type="button" className="py-2 px-[1.3rem] text-[1rem] font-medium bg-paleGray rounded-md text-darkGray" onClick={modelClose}>
                 Cancel
               </button>
             </div>
