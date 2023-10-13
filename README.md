@@ -1,4 +1,4 @@
-## Curd Application
+## Todo-List Application
 
 A brief description of your React application.
 
