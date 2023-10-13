@@ -1,3 +1,3 @@
 import Task from "./task/taskComponent";
-
-export { Task }
+import Model from "./modelWindow/model";
+export { Task, Model }

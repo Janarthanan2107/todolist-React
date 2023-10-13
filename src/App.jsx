@@ -1,9 +1,9 @@
+import { Task, Model } from "./component";
 import toast, { Toaster } from "react-hot-toast";
 import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
 
 // styles
 import "./App.css";
-import { Task } from "./component";
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
               TODO LIST
             </h1>
 
-            {/* list to add */}
+            {/* add to list */}
             <div className="mt-6 flex justify-between items-center w-full">
               <button className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white">
                 Add Task
@@ -28,8 +28,8 @@ const App = () => {
                 <option value="Complete">Completed</option>
               </select>
             </div>
-            
             <Task />
+            <Model />
           </div>
         </div>
       </div>
