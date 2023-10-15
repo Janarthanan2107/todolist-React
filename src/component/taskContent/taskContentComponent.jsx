@@ -1,21 +1,11 @@
 import { useState } from "react";
 
-const TaskContent = ({ title, status }) => {
+const TaskContent = ({ title, status, formattedDate }) => {
   const [isChecked, setIsChecked] = useState(status === "incomplete");
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-
-    // Get the current date and time
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      month: "numeric",
-      day: "numeric",
-      year: "numeric",
-    });
 
   return (
     <>
