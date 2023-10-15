@@ -10,9 +10,13 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   // model window state
   const [isModelOpen, setIsModelOpen] = useState(false);
-
-  // isEditing
+  // state for update
   const [isEditing, setIsEditing] = useState(false);
+  const [editTaskId, setEditTaskId] = useState(null);
+
+  const editTask = (taskId) => {
+    setEditTaskId(taskId);
+  };
 
   const modelOpen = () => {
     setIsModelOpen(true);
@@ -55,11 +59,13 @@ const App = () => {
             </div>
             <Task
               tasks={tasks}
+              setTasks={setTasks}
+              modelOpen={modelOpen}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
-              modelOpen={modelOpen}
+              editTask={editTask}
             />
-            <Model isModelOpen={isModelOpen} modelClose={modelClose} isEditing={isEditing} />
+            <Model isModelOpen={isModelOpen} modelClose={modelClose} />
           </div>
         </div>
       </div>
