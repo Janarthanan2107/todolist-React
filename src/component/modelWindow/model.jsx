@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 // css import
 import "../modelWindow/model.css";
 
-const Model = ({ isModelOpen, modelClose, isEditing }) => {
+const Model = ({ isModelOpen, modelClose }) => {
   // form states
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Incomplete");
@@ -39,31 +39,28 @@ const Model = ({ isModelOpen, modelClose, isEditing }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isEditing) {
-      
+    if (title) {
+      // Create a new task object with a unique ID
+      const newItem = {
+        id: uuidv4(),
+        title,
+        status,
+        formattedDate,
+      };
+      // console.log(newItem);
+      // getting the existing data
+      const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      // adding the new data with that existing data
+      const updatedTasks = [...existingTasks, newItem];
+      // storing in local storage
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      // nulling the inputs
+      nulling();
+      // model close
+      modelClose();
+      toast.success("Successfully Created!");
     } else {
-      if (title) {
-        // Create a new task object with a unique ID
-        const newItem = {
-          id: uuidv4(),
-          title,
-          status,
-          formattedDate,
-        };
-        // console.log(newItem);
-        // getting the existing data
-        const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        // adding the new data with that existing data
-        const updatedTasks = [...existingTasks, newItem];
-        // storing in local storage
-        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-        // nulling the inputs
-        nulling();
-        // model close
-        modelClose();
-      } else {
-        toast.error("Please enter a title");
-      }
+      toast.error("Please enter a title");
     }
   };
 
