@@ -65,7 +65,16 @@ const App = () => {
               setIsEditing={setIsEditing}
               editTask={editTask}
             />
-            <Model isModelOpen={isModelOpen} modelClose={modelClose} />
+            <Model
+              isModelOpen={isModelOpen}
+              modelClose={modelClose}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              editTaskId={editTaskId}
+              setEditTaskId={setEditTaskId}
+              tasks={tasks}
+              setTasks={setTasks}
+            />
           </div>
         </div>
       </div>
