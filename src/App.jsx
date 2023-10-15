@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Task, Model } from "./component";
 import toast, { Toaster } from "react-hot-toast";
-import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
 
 // styles
 import "./App.css";
 
 const App = () => {
+  // tasks
+  const [tasks, setTasks] = useState([]);
   // model window state
   const [isModelOpen, setIsModelOpen] = useState(false);
+
+  // isEditing
+  const [isEditing, setIsEditing] = useState(false);
 
   const modelOpen = () => {
     setIsModelOpen(true);
@@ -17,6 +21,12 @@ const App = () => {
   const modelClose = () => {
     setIsModelOpen(false);
   };
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(storedTasks);
+    // console.log("existing Tasks", storedTasks);
+  }, []);
 
   return (
     <>
@@ -43,8 +53,13 @@ const App = () => {
                 <option value="Complete">Completed</option>
               </select>
             </div>
-            <Task />
-            <Model isModelOpen={isModelOpen} modelClose={modelClose}/>
+            <Task
+              tasks={tasks}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              modelOpen={modelOpen}
+            />
+            <Model isModelOpen={isModelOpen} modelClose={modelClose} isEditing={isEditing} />
           </div>
         </div>
       </div>
