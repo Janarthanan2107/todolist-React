@@ -7,6 +7,7 @@ import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
 import "./App.css";
 
 const App = () => {
+  // model window state
   const [isModelOpen, setIsModelOpen] = useState(false);
 
   const modelOpen = () => {
