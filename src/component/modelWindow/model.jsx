@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 // css import
 import "../modelWindow/model.css";
 
-const Model = ({ isModelOpen, modelClose }) => {
+const Model = ({ isModelOpen, modelClose, isEditing }) => {
   // form states
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Incomplete");
@@ -21,34 +21,49 @@ const Model = ({ isModelOpen, modelClose }) => {
     setStatus(e.target.value);
   };
 
-  const nulling =()=>{
-    setTitle("")
-    setStatus("")
-  }
+  const nulling = () => {
+    setTitle("");
+    setStatus("");
+  };
+
+  // Get the current date and time
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    month: "numeric",
+    day: "numeric",
+    year: "numeric",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(title){
-      // Create a new task object with a unique ID
-      const newItem = {
-        id: uuidv4(),
-        title,
-        status,
-      };
-      console.log(newItem)
-      // getting the existing data
-      const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-      // adding the new data with that existing data
-      const updatedTasks = [...existingTasks, newItem];
-      // storing in local storage
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      // nulling the inputs
-      nulling()
-      // model close
-      modelClose();
-    }else{
-      toast.error("Please enter a title");
+    if (isEditing) {
+      
+    } else {
+      if (title) {
+        // Create a new task object with a unique ID
+        const newItem = {
+          id: uuidv4(),
+          title,
+          status,
+          formattedDate,
+        };
+        // console.log(newItem);
+        // getting the existing data
+        const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        // adding the new data with that existing data
+        const updatedTasks = [...existingTasks, newItem];
+        // storing in local storage
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+        // nulling the inputs
+        nulling();
+        // model close
+        modelClose();
+      } else {
+        toast.error("Please enter a title");
+      }
     }
   };
 
@@ -91,9 +106,7 @@ const Model = ({ isModelOpen, modelClose }) => {
                 onChange={handleStatusChange}
                 className="py-3 px-2 w-full"
               >
-                <option value="Incomplete">
-                  Incomplete
-                </option>
+                <option value="Incomplete">Incomplete</option>
                 <option value="Complete">Completed</option>
               </select>
             </div>
