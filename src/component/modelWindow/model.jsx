@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-// icons import
 import { LiaTimesSolid } from "react-icons/lia";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
-// css import
 import "../modelWindow/model.css";
 
-const Model = ({ isModelOpen, modelClose }) => {
-  // form states
+const Model = ({
+  isModelOpen,
+  modelClose,
+  isEditing,
+  setIsEditing,
+  editTaskId,
+  tasks,
+  setTasks,
+  setEditTaskId,
+}) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Incomplete");
 
@@ -21,46 +27,70 @@ const Model = ({ isModelOpen, modelClose }) => {
     setStatus(e.target.value);
   };
 
-  const nulling = () => {
+  const resetForm = () => {
     setTitle("");
-    setStatus("");
+    setStatus("Incomplete");
   };
 
-  // Get the current date and time
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    month: "numeric",
-    day: "numeric",
-    year: "numeric",
-  });
+  useEffect(() => {
+    if (isEditing) {
+      const taskToEdit = tasks.find((task) => task.id === editTaskId);
+      if (taskToEdit) {
+        setTitle(taskToEdit.title);
+        setStatus(taskToEdit.status);
+      }
+    }
+  }, [isEditing, editTaskId, tasks]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (title) {
-      // Create a new task object with a unique ID
+    if (!title) {
+      toast.error("Please enter a title");
+      return;
+    }
+
+    if (isEditing) {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === editTaskId) {
+          return {
+            ...task,
+            title,
+            status,
+          };
+        }
+        return task;
+      });
+
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      setTasks(updatedTasks);
+
+      resetForm();
+      modelClose();
+      setIsEditing(false);
+      setEditTaskId(null);
+      toast.success("Task Updated!");
+    } else {
       const newItem = {
         id: uuidv4(),
         title,
         status,
-        formattedDate,
+        formattedDate: new Date().toLocaleString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          month: "numeric",
+          day: "numeric",
+          year: "numeric",
+        }),
       };
-      // console.log(newItem);
-      // getting the existing data
-      const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-      // adding the new data with that existing data
-      const updatedTasks = [...existingTasks, newItem];
-      // storing in local storage
+
+      const updatedTasks = [...tasks, newItem];
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      // nulling the inputs
-      nulling();
-      // model close
+
+      setTasks(updatedTasks);
+      resetForm();
       modelClose();
-      toast.success("Successfully Created!");
-    } else {
-      toast.error("Please enter a title");
+      toast.success("Task Created!");
     }
   };
 
@@ -70,7 +100,7 @@ const Model = ({ isModelOpen, modelClose }) => {
         <div className="bg-lightGray p-5 w-[500px] rounded-lg relative">
           <div className="flex justify-between">
             <p className="text-[1.2rem] font-semibold text-darkGray">
-              Add TODO
+              {isEditing ? "Edit Task" : "Add TODO"}
             </p>
             <span
               className="bg-iconBg p-2 rounded-sm text-[1.1rem] text-lightDarkGray cursor-pointer absolute -top-11 right-2 hover:bg-red-500 hover:text-white"
@@ -112,7 +142,7 @@ const Model = ({ isModelOpen, modelClose }) => {
                 type="submit"
                 className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white"
               >
-                Add Task
+                {isEditing ? "Update Task" : "Add Task"}
               </button>
               <button
                 type="button"
