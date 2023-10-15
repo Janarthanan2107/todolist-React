@@ -37,11 +37,11 @@ const Model = ({ isModelOpen, modelClose }) => {
       };
       console.log(newItem)
       // getting the existing data
-      // const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
       // adding the new data with that existing data
-      // const updatedTasks = [...existingTasks, newItem];
+      const updatedTasks = [...existingTasks, newItem];
       // storing in local storage
-      // localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
       // nulling the inputs
       nulling()
       // model close
