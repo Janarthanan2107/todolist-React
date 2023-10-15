@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const TaskContent = ({ title, status, formattedDate }) => {
-  const [isChecked, setIsChecked] = useState(status === "incomplete");
+  const [isChecked, setIsChecked] = useState(status === "Complete");
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
