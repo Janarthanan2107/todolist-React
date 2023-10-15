@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 // icons import
 import { LiaTimesSolid } from "react-icons/lia";
+import toast, { Toaster } from "react-hot-toast";
 
 // css import
 import "../modelWindow/model.css";
@@ -47,7 +48,7 @@ const Model = ({ isModelOpen, modelClose }) => {
       // model close
       modelClose();
     }else{
-
+      toast.error("Please enter a title");
     }
   };
 
