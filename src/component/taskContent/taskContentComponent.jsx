@@ -1,16 +1,40 @@
-const TaskContent = () => {
+import { useState } from "react";
+
+const TaskContent = ({ title, status }) => {
+  const [isChecked, setIsChecked] = useState(status === "incomplete");
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+    // Get the current date and time
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+    });
+
   return (
     <>
       <div className="flex items-center gap-3 p-2">
         <input
           type="checkbox"
-          name=""
-          id=""
+          checked={isChecked}
+          onChange={handleCheckboxChange}
           className="w-[1.5rem] h-[1.5rem] bg-lightGray"
         />
         <span>
-          <p className="text-[14px] text-lightDarkGray font-medium">Task - 1</p>
-          <p className="text-[12px] text-lightDarkGray">10.15 PM, 13/10/2023</p>
+          <p
+            className={`text-[14px] text-lightDarkGray font-medium ${
+              isChecked === true ? "line-through" : ""
+            }`}
+          >
+            {title}
+          </p>
+          <p className="text-[12px] text-lightDarkGray">{formattedDate}</p>
         </span>
       </div>
     </>
