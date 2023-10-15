@@ -1,7 +1,11 @@
 import TaskAction from "../taskAction/taskActionComponent";
 import TaskContent from "../taskContent/taskContentComponent";
 
-const Task = ({ tasks, isEditing, setIsEditing,modelOpen }) => {
+const Task = ({ setTasks, modelOpen, isEditing, setIsEditing, editTask }) => {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  console.log("existing Task", tasks);
+
   return (
     <>
       <div className="mt-3 p-5 flex flex-col gap-3 justify-between items-center bg-lightGray rounded-lg w-full">
@@ -25,9 +29,12 @@ const Task = ({ tasks, isEditing, setIsEditing,modelOpen }) => {
                     {/* action-section */}
                     <TaskAction
                       id={id}
+                      tasks={tasks}
+                      setTasks={setTasks}
+                      modelOpen={modelOpen}
                       isEditing={isEditing}
                       setIsEditing={setIsEditing}
-                      modelOpen={modelOpen}
+                      editTask={editTask}
                     />
                   </div>
                 </div>
