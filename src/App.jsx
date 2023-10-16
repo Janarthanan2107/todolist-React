@@ -1,37 +1,12 @@
-import { useEffect, useState } from "react";
 import { Task, Model } from "./component";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
+import { useModalContext } from "./context/modal.context";
 // styles
 import "./App.css";
 
 const App = () => {
-  // tasks
-  const [tasks, setTasks] = useState([]);
-  // model window state
-  const [isModelOpen, setIsModelOpen] = useState(false);
-  // state for update
-  const [isEditing, setIsEditing] = useState(false);
-  const [editTaskId, setEditTaskId] = useState(null);
-
-  const editTask = (taskId) => {
-    setEditTaskId(taskId);
-  };
-
-  const modelOpen = () => {
-    setIsModelOpen(true);
-  };
-
-  const modelClose = () => {
-    setIsModelOpen(false);
-  };
-
-  useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    setTasks(storedTasks);
-    // console.log("existing Tasks", storedTasks);
-  }, []);
-
+  const { openModal } = useModalContext();
   return (
     <>
       <Toaster position="bottom-right" reverseOrder={false} />
@@ -46,7 +21,7 @@ const App = () => {
             <div className="mt-6 flex justify-between items-center w-full">
               <button
                 className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white"
-                onClick={modelOpen}
+                onClick={openModal}
               >
                 Add Task
               </button>
@@ -57,24 +32,8 @@ const App = () => {
                 <option value="Complete">Completed</option>
               </select>
             </div>
-            <Task
-              tasks={tasks}
-              setTasks={setTasks}
-              modelOpen={modelOpen}
-              isEditing={isEditing}
-              setIsEditing={setIsEditing}
-              editTask={editTask}
-            />
-            <Model
-              isModelOpen={isModelOpen}
-              modelClose={modelClose}
-              isEditing={isEditing}
-              setIsEditing={setIsEditing}
-              editTaskId={editTaskId}
-              setEditTaskId={setEditTaskId}
-              tasks={tasks}
-              setTasks={setTasks}
-            />
+            <Task />
+            <Model />
           </div>
         </div>
       </div>
