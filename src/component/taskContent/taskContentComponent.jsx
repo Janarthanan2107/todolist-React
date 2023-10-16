@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TaskContent = ({ title, status, formattedDate }) => {
   const [isChecked, setIsChecked] = useState(status === "Complete");
