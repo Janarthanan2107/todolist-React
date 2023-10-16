@@ -1,10 +1,10 @@
 import TaskAction from "../taskAction/taskActionComponent";
 import TaskContent from "../taskContent/taskContentComponent";
 
-const Task = ({ setTasks, modelOpen, isEditing, setIsEditing, editTask }) => {
-  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+import { useTaskContext } from "../../context/task.context";
 
-  console.log("existing Task", tasks);
+const Task = () => {
+  const { tasks } = useTaskContext();
 
   return (
     <>
@@ -27,15 +27,7 @@ const Task = ({ setTasks, modelOpen, isEditing, setIsEditing, editTask }) => {
                       formattedDate={formattedDate}
                     />
                     {/* action-section */}
-                    <TaskAction
-                      id={id}
-                      tasks={tasks}
-                      setTasks={setTasks}
-                      modelOpen={modelOpen}
-                      isEditing={isEditing}
-                      setIsEditing={setIsEditing}
-                      editTask={editTask}
-                    />
+                    <TaskAction id={id} />
                   </div>
                 </div>
               );
