@@ -6,16 +6,15 @@ import toast from "react-hot-toast";
 
 import "../modelWindow/model.css";
 
-const Model = ({
-  isModelOpen,
-  modelClose,
-  isEditing,
-  setIsEditing,
-  editTaskId,
-  tasks,
-  setTasks,
-  setEditTaskId,
-}) => {
+//import custom hook for Modal Context
+import { useModalContext } from "../../context/modal.context";
+import { useTaskContext } from "../../context/task.context";
+
+const Model = ({}) => {
+  //Modal
+  const { isModalOpen, closeModal } = useModalContext();
+  const { tasks, addTask, isEditing, editTaskId, editTask } = useTaskContext();
+
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Incomplete");
 
@@ -34,10 +33,10 @@ const Model = ({
 
   useEffect(() => {
     if (isEditing) {
-      const taskToEdit = tasks.find((task) => task.id === editTaskId);
-      if (taskToEdit) {
-        setTitle(taskToEdit.title);
-        setStatus(taskToEdit.status);
+      const itemToEdit = tasks.find((task) => task.id === editTaskId);
+      if (itemToEdit) {
+        setTitle(itemToEdit.title);
+        setStatus(itemToEdit.status);
       }
     }
   }, [isEditing, editTaskId, tasks]);
@@ -62,13 +61,10 @@ const Model = ({
         return task;
       });
 
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      setTasks(updatedTasks);
+      editTask(updatedTasks);
 
       resetForm();
-      modelClose();
-      setIsEditing(false);
-      setEditTaskId(null);
+      closeModal();
       toast.success("Task Updated!");
     } else {
       const newItem = {
@@ -84,18 +80,15 @@ const Model = ({
         }),
       };
 
-      const updatedTasks = [...tasks, newItem];
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-      setTasks(updatedTasks);
+      addTask(newItem);
       resetForm();
-      modelClose();
+      closeModal();
       toast.success("Task Created!");
     }
   };
 
   return (
-    <div className={`overlay ${isModelOpen ? "open" : "close"}`}>
+    <div className={`overlay ${isModalOpen ? "open" : "close"}`}>
       <div className="model-container">
         <div className="bg-lightGray p-5 w-[500px] rounded-lg relative">
           <div className="flex justify-between">
@@ -104,7 +97,7 @@ const Model = ({
             </p>
             <span
               className="bg-iconBg p-2 rounded-sm text-[1.1rem] text-lightDarkGray cursor-pointer absolute -top-11 right-2 hover:bg-red-500 hover:text-white"
-              onClick={modelClose}
+              onClick={closeModal}
             >
               <LiaTimesSolid />
             </span>
@@ -147,7 +140,7 @@ const Model = ({
               <button
                 type="button"
                 className="py-2 px-[1.3rem] text-[1rem] font-medium bg-paleGray rounded-md text-darkGray"
-                onClick={modelClose}
+                onClick={closeModal}
               >
                 Cancel
               </button>
