@@ -1,26 +1,21 @@
 import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
-const TaskAction = ({
-  id,
-  tasks,
-  setTasks,
-  modelOpen,
-  isEditing,
-  setIsEditing,
-  editTask
-}) => {
+import { useTaskContext } from "../../context/task.context";
+import { useModalContext } from "../../context/modal.context";
+
+const TaskAction = ({ id }) => {
+  const { deleteTask, setIsEditing, setEditTaskId } = useTaskContext();
+  const { openModal } = useModalContext();
   const handleDeleteTask = (id) => {
-    const remainingTasks = tasks.filter((task) => task.id !== id);
-    localStorage.setItem("tasks", JSON.stringify(remainingTasks));
-    setTasks(remainingTasks);
+    deleteTask(id);
     toast.success("Successfully Deleted!");
   };
 
   const editModelOpen = (id) => {
-    setIsEditing(!isEditing);
-    modelOpen();
-    editTask(id)
+    setIsEditing(true);
+    setEditTaskId(id);
+    openModal();
   };
 
   return (
