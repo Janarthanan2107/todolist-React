@@ -1,12 +1,10 @@
-import { Task, Model } from "./component";
+import { Task, Model, Controls } from "./component";
 import { Toaster } from "react-hot-toast";
 
-import { useModalContext } from "./context/modal.context";
 // styles
 import "./App.css";
 
 const App = () => {
-  const { openModal } = useModalContext();
   return (
     <>
       <Toaster position="bottom-right" reverseOrder={false} />
@@ -18,20 +16,7 @@ const App = () => {
             </h1>
 
             {/* add to list */}
-            <div className="mt-6 flex justify-between items-center w-full">
-              <button
-                className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white"
-                onClick={openModal}
-              >
-                Add Task
-              </button>
-              {/* filter Option */}
-              <select className="py-2 px-[1rem] text-[1rem] font-medium bg-paleGray rounded-md text-darkGray">
-                <option value="All">All</option>
-                <option value="Incomplete">Incomplete</option>
-                <option value="Complete">Completed</option>
-              </select>
-            </div>
+            <Controls />
             <Task />
             <Model />
           </div>
