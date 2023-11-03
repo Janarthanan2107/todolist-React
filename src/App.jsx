@@ -20,6 +20,7 @@ const App = () => {
             <Controls />
             {/* task */}
             <Task />
+            {/* model */}
             <Model />
           </div>
         </div>
