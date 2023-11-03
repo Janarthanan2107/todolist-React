@@ -17,17 +17,21 @@ const TaskProvider = ({ children }) => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  // add function for task
   const addTask = (taskToAdd) => {
     setTasks([...tasks, taskToAdd]);
   };
 
+  // delete function for task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  // edit function for task
   const editTask = (updatedTasks) => {
     setTasks(updatedTasks);
 
+    // this step to restart the programs
     setEditTaskId(null);
     setIsEditing(false);
   };
