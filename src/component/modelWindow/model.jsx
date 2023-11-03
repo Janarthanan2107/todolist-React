@@ -30,6 +30,7 @@ const Model = ({}) => {
     setStatus(e.target.value);
   };
 
+  // function for restart form
   const resetForm = () => {
     setTitle("");
     setStatus("Incomplete");
