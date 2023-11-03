@@ -47,14 +47,17 @@ const Model = ({}) => {
     }
   }, [isEditing, editTaskId, tasks]);
 
+  // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // validation for empty title
     if (!title) {
       toast.error("Please enter a title");
       return;
     }
 
+    // activate this branch while edit mode is true
     if (isEditing) {
       const updatedTasks = tasks.map((task) => {
         if (task.id === editTaskId) {
