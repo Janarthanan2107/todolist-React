@@ -10,11 +10,14 @@ const TaskAction = ({ id }) => {
   // access function value from the context 
   const { deleteTask, setIsEditing, setEditTaskId } = useTaskContext();
   const { openModal } = useModalContext();
+
+  // delete function
   const handleDeleteTask = (id) => {
     deleteTask(id);
     toast.success("Successfully Deleted!");
   };
 
+  // edit function 
   const editModelOpen = (id) => {
     setIsEditing(true);
     setEditTaskId(id);
@@ -23,6 +26,7 @@ const TaskAction = ({ id }) => {
 
   return (
     <>
+      {/* Actions for edit and delete */}
       <div className="flex items-center gap-3 p-2">
         <div
           className="bg-iconBg p-2 rounded-md text-[1.1rem] text-lightDarkGray cursor-pointer"
