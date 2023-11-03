@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from "react";
 const ModalContext = createContext();
 
 const ModalProvider = ({children})=>{
+    // state for open model on main screen
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = ()=>{
