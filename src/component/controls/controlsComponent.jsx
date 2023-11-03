@@ -5,6 +5,7 @@ const Controls = () => {
   return (
     <>
       <div className="mt-6 flex justify-between items-center w-full">
+        {/* button for getting model open*/}
         <button
           className="py-2 px-[1.3rem] text-[1rem] font-medium bg-skyBlue rounded-md text-white"
           onClick={openModal}
