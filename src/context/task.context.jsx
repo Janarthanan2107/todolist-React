@@ -36,6 +36,7 @@ const TaskProvider = ({ children }) => {
     setIsEditing(false);
   };
 
+  // passing the values to the app by provider component
   const initialValues = {
     tasks,
     setTasks,
