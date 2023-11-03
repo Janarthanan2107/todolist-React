@@ -15,6 +15,7 @@ const Model = ({}) => {
   const { isModalOpen, closeModal } = useModalContext();
   const { tasks, addTask, isEditing, editTaskId, editTask } = useTaskContext();
 
+  // states for the fields in model form
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Incomplete");
 
