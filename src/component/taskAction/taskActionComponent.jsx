@@ -1,10 +1,13 @@
 import { BiSolidTrashAlt, BiSolidPencil } from "react-icons/bi";
 import toast from "react-hot-toast";
 
+// import the both model for task and model from context
 import { useTaskContext } from "../../context/task.context";
 import { useModalContext } from "../../context/modal.context";
 
 const TaskAction = ({ id }) => {
+
+  // access function value from the context 
   const { deleteTask, setIsEditing, setEditTaskId } = useTaskContext();
   const { openModal } = useModalContext();
   const handleDeleteTask = (id) => {
