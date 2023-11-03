@@ -19,10 +19,13 @@ const Model = ({}) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("Incomplete");
 
+  // separate onchang function for both
+  // title on change function
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
+  // status on change function
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
