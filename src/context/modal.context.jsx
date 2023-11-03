@@ -10,10 +10,13 @@ const ModalProvider = ({children})=>{
     const openModal = ()=>{
         setIsModalOpen(true)
     }
+    
     // close function for model
     const closeModal = ()=>{
         setIsModalOpen(false)
     }
+    
+    // passing initial values to app by context
     const initialValues = {
         openModal, closeModal, isModalOpen
     }
