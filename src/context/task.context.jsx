@@ -7,6 +7,7 @@ const data = localStorage.getItem("tasks")
   : [];
 
 const TaskProvider = ({ children }) => {
+  // providing states for task components
   const [tasks, setTasks] = useState(data);
   const [isEditing, setIsEditing] = useState(false);
   const [editTaskId, setEditTaskId] = useState(null);
