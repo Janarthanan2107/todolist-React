@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const TaskContext = createContext();
 
+// creating database for data savings
 const data = localStorage.getItem("tasks")
   ? JSON.parse(localStorage.getItem("tasks"))
   : [];
