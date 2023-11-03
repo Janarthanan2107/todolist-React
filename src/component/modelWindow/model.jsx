@@ -142,6 +142,7 @@ const Model = ({}) => {
                 <option value="Complete">Completed</option>
               </select>
             </div>
+            {/* footer content for a model */}
             <div className="form-control flex gap-3 mt-4">
               <button
                 type="submit"
