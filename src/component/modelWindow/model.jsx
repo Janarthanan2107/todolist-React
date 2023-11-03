@@ -76,10 +76,13 @@ const Model = ({}) => {
       closeModal();
       toast.success("Task Updated!");
     } else {
+      // creating new item
       const newItem = {
+        // setting id for item
         id: uuidv4(),
         title,
         status,
+        // setting formatted date for an item
         formattedDate: new Date().toLocaleString("en-US", {
           hour: "numeric",
           minute: "numeric",
