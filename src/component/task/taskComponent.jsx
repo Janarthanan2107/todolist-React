@@ -1,9 +1,12 @@
 import TaskAction from "../taskAction/taskActionComponent";
 import TaskContent from "../taskContent/taskContentComponent";
 
+// import the task context from provider
 import { useTaskContext } from "../../context/task.context";
 
 const Task = () => {
+
+  // access the task values from context with custome hook
   const { tasks } = useTaskContext();
 
   return (
