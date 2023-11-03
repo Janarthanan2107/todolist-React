@@ -6,10 +6,11 @@ const ModalProvider = ({children})=>{
     // state for open model on main screen
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // open function for model
     const openModal = ()=>{
         setIsModalOpen(true)
     }
-
+    // close function for model
     const closeModal = ()=>{
         setIsModalOpen(false)
     }
