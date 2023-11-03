@@ -16,6 +16,8 @@ const TaskContent = ({ title, status, formattedDate }) => {
           onChange={handleCheckboxChange}
           className="w-[1.5rem] h-[1.5rem] bg-lightGray"
         />
+
+        {/* The exact content to display of the task */}
         <span>
           <p
             className={`text-[14px] text-lightDarkGray font-medium ${
