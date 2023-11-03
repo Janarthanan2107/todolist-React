@@ -114,6 +114,7 @@ const Model = ({}) => {
               <LiaTimesSolid />
             </span>
           </div>
+          {/* form container */}
           <form className="mt-5 flex flex-col gap-5" onSubmit={handleSubmit}>
             <div className="form-control">
               <label htmlFor="title" className="font-medium text-darkGray">
