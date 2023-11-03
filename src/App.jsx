@@ -16,6 +16,7 @@ const App = () => {
             </h1>
 
             {/* add to list */}
+            {/* controls  */}
             <Controls />
             <Task />
             <Model />
